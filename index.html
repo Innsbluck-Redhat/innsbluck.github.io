@@ -1,15 +1,106 @@
+<!doctype html>
 <html>
+
 <head>
-    <title>Tundra Gallery</title>
-    <meta charset="utf-8"/>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,100,700,900' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Innsbluck</title>
+    <link rel="shortcut icon" href="/favicon.ico?">
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="main.css">
+    <!-- Your application bootstrap  -->
+    <script type="text/javascript">
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('introduction', ['ngMaterial']).config(function($mdIconProvider) {
+            $mdIconProvider
+                .defaultIconSet('mdi.svg')
+        })
+        .controller('ListCtrl', function($scope, $mdDialog) {
+            $scope.contacts = [{
+                name: 'Google+',
+                icon: 'google-plus',
+                url: 'https://plus.google.com/104818089965521620102'
+            }, {
+                name: 'Twitter',
+                icon: 'twitter',
+                url: 'https://twitter.com/innsbluck_'
+            }, {
+                name: 'Github',
+                icon: 'github-circle',
+                url: 'https://github.com/Innsbluck-Redhat'
+            }, ];
+
+            $scope.moveTo = function(to, event) {
+                window.open(to, '_blank');
+            };
+        });
+    </script>
 </head>
 
-<body>
-    <header>
-      <h1 class="page-title">TUNDRA GALLERY</h1>
-      <p class="page-description">The Tundra Gallery is a collection of photographs from three distinct areas: arctic tundra, alpine tundra, and antarctic tundra. In tundra, the vegetation is composed of dwarf shrubs, sedges and grasses, mosses, and lichens, making for diverse ecology and stunning photos. </p>
-    </header>
-  </body>
+<body ng-app="introduction">
+    <md-content>
+        <div id="side-nav">
+            <div class="intro-profile">
+                <img id="innsbluck-icon" src="img/icon.jpg" />
+                <h1 class="md-display-1">Innsbluck</h1>
+                <p class="md-caption">Androidアプリの開発をしています。</p>
+            </div>
+            <md-list ng-controller="ListCtrl" ng-cloak>
+                <md-subheader class="md-primary md-no-sticky" style="background-color: : #00000000">Contacts</md-subheader>
+                <md-list-item ng-click="moveTo(contact.url, $event)" ng-repeat="contact in contacts">
+                    <md-icon md-svg-icon="{{contact.icon}}"></md-icon>
+                    <p> {{contact.name}} </p>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div id="content">
+            <h2 class="md-display-1">About me</h2>
+            <p class="md-body-1">
+                Androidアプリの開発をしています。
+                <br>
+            </p>
+            <h2 class="md-headline">Apps</h2>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">NicoPix</span>
+                        <span class="md-subhead">ニコニコ静画ビューワ</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <img class="md-media-lg" src="img/nicopix_icon.png">
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="start center">
+                    <md-button ng-href="https://play.google.com/store/apps/details?id=com.innsbluck.nicopix">GOOGLE PLAY</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Morse</span>
+                        <span class="md-subhead">モールス信号の変換アプリ</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <img class="md-media-lg" src="img/morse_icon.png">
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="start center">
+                    <md-button ng-href="https://play.google.com/store/apps/details?id=com.innsbluck.morse">GOOGLE PLAY</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+</body>
+
 </html>
